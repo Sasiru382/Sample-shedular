@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,16 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- EmailJS SDK for sending emails from static site -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
+
 <body>
     <!-- Heart Canvas Background -->
     <canvas id="heart-canvas"></canvas>
@@ -83,7 +89,8 @@
         <!-- STEP 4: Retry 2 (Listen for a bit) -->
         <section id="step-4" class="step-card hidden">
             <div class="image-wrapper">
-                <img src="images/Gemini_Generated_Image_fp5zyhfp5zyhfp5z.png" alt="Sweet Hopeful Beaver" class="beaver-img sad-wiggle">
+                <img src="images/Gemini_Generated_Image_fp5zyhfp5zyhfp5z.png" alt="Sweet Hopeful Beaver"
+                    class="beaver-img sad-wiggle">
             </div>
             <h2 class="romantic-heading">i just want to listean to you for a bit and see your beautiful smile 🌸✨</h2>
             <p class="romantic-subtext">Seeing your bright smile makes my whole week so much sweeter.</p>
@@ -104,14 +111,18 @@
                 <img src="images/last no.png" alt="Crying Beaver" class="beaver-img tear-anim img-center-face">
             </div>
             <h2 class="romantic-heading">sorry to distube love 💔</h2>
-            <p class="romantic-subtext">Thank you for letting me know. I will always wish you all the happiness in the world!</p>
+            <p class="romantic-subtext">Thank you for letting me know. I will always wish you all the happiness in the
+                world!</p>
             <div class="status-box">
                 <i class="fa-solid fa-envelope-circle-check"></i>
                 <span id="refusal-status-text">Your response log has been sent to sasiruvishmika@gmail.com</span>
             </div>
-            <div class="action-buttons margin-top-md">
+            <div class="action-buttons dual-buttons margin-top-md">
                 <button id="btn-restart" class="btn btn-outline">
                     <i class="fa-solid fa-rotate-left"></i> Change My Mind 💖
+                </button>
+                <button id="btn-final-no" class="btn btn-secondary btn-no">
+                    <span>My mind wont change 😔</span>
                 </button>
             </div>
         </section>
@@ -121,7 +132,8 @@
             <div class="calendar-header">
                 <span class="badge-tag"><i class="fa-solid fa-sparkles"></i> Special Date Scheduler</span>
                 <h2 class="romantic-heading">Pick Our Special Date & Time 📅✨</h2>
-                <p class="romantic-subtext">Choose a date between <strong>Today</strong> and <strong>28-December-2026</strong>, and a time between <strong>10:00 AM – 3:00 PM</strong>.</p>
+                <p class="romantic-subtext">Choose a date between <strong>Today</strong> and
+                    <strong>28-December-2026</strong>, and a time between <strong>10:00 AM – 3:00 PM</strong>.</p>
             </div>
 
             <!-- Custom Interactive Month Calendar -->
@@ -152,7 +164,8 @@
             <!-- Dynamic Romantic Message Box -->
             <div id="dynamic-date-message" class="romantic-message-box">
                 <i class="fa-solid fa-quote-left quote-icon"></i>
-                <p id="date-message-text">Select your favorite date and time above to see a special note just for you!</p>
+                <p id="date-message-text">Select your favorite date and time above to see a special note just for you!
+                </p>
             </div>
 
             <div class="action-buttons margin-top-md">
@@ -217,4 +230,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

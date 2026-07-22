@@ -318,6 +318,36 @@ document.addEventListener('DOMContentLoaded', () => {
         goToStep(2);
     });
 
+    // Step 5: Final refusal - send email
+    document.getElementById('btn-final-no').addEventListener('click', () => {
+        state.answersHistory.push("Final Decision: No");
+
+        const payload = {
+            status: "Declined (Final)",
+            answers: state.answersHistory,
+            timestamp: new Date().toLocaleString()
+        };
+
+        const subject = "Date Invitation - Final Response (Declined)";
+        const bodyLines = [
+            "Hi Sasiru!",
+            "",
+            "Here are the date invitation response details:",
+            "----------------------------------",
+            `Status: ${payload.status}`,
+            `Response Path: ${payload.answers.join(' -> ')}`,
+            `Timestamp: ${payload.timestamp}`,
+            "",
+            "Sent from the Date Invitation Web App 💕"
+        ];
+
+        const mailtoUrl = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+        window.open(mailtoUrl, '_blank');
+
+        showToast("Response sent to sasiruvishmika@gmail.com 💌");
+        document.getElementById('refusal-status-text').textContent = "Your final response has been sent to sasiruvishmika@gmail.com ✅";
+    });
+
     // --- Interactive Calendar System ---
     function renderCalendar() {
         const monthTitle = document.getElementById('cal-month-year-title');
@@ -499,19 +529,70 @@ document.addEventListener('DOMContentLoaded', () => {
         sendSuccessEmail();
     });
 
-    // --- Email Dispatching System ---
+    // --- Email Dispatching System (EmailJS) ---
+    // ⚠️ SETUP REQUIRED: Replace these with your EmailJS credentials
+    // 1. Go to https://www.emailjs.com/ and create a free account
+    // 2. Add an Email Service (Gmail) -> copy the Service ID
+    // 3. Create an Email Template -> copy the Template ID
+    // 4. Go to Account -> copy your Public Key
+    const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";      // Replace this
+    const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";      // Replace this
+    const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";    // Replace this
+
+    // Initialize EmailJS
+    try {
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        }
+    } catch (e) {
+        console.log("EmailJS init:", e);
+    }
+
+    function sendEmailViaEmailJS(templateParams, onSuccess, onFail) {
+        // Check if EmailJS is configured
+        if (EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY" || typeof emailjs === 'undefined') {
+            console.warn("EmailJS not configured. Using mailto fallback.");
+            if (onFail) onFail("EmailJS not configured");
+            return;
+        }
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then(() => {
+                console.log("Email sent successfully via EmailJS!");
+                if (onSuccess) onSuccess();
+            })
+            .catch((error) => {
+                console.error("EmailJS Error:", error);
+                if (onFail) onFail(error);
+            });
+    }
+
     function sendRefusalEmail() {
         const badgeText = document.getElementById('refusal-status-text');
-        badgeText.textContent = `Log recorded for ${RECIPIENT_EMAIL}`;
+        badgeText.textContent = `Sending response log to ${RECIPIENT_EMAIL}...`;
 
-        const payload = {
+        const templateParams = {
+            to_email: RECIPIENT_EMAIL,
+            subject: "Date Invitation - Response Log (Declined)",
             status: "Declined",
-            answers: state.answersHistory,
+            venue: "Chocolits",
+            date: "Not selected",
+            time: "Not selected",
+            answers: state.answersHistory.join(" -> "),
             timestamp: new Date().toLocaleString()
         };
 
-        console.log("Refusal Email Payload:", payload);
-        triggerMailtoFallback("Invitation Update - Refusal Log", payload);
+        sendEmailViaEmailJS(templateParams,
+            () => {
+                badgeText.textContent = `Response log sent to ${RECIPIENT_EMAIL} ✅`;
+                showToast("Response sent successfully! 💌");
+            },
+            () => {
+                // Fallback: open mailto
+                triggerMailtoFallback("Date Invitation - Response Log (Declined)", templateParams);
+                badgeText.textContent = `Log recorded for ${RECIPIENT_EMAIL}`;
+            }
+        );
     }
 
     function sendSuccessEmail() {
@@ -520,24 +601,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         statusText.textContent = `Sending details to ${RECIPIENT_EMAIL}...`;
 
-        const payload = {
+        const templateParams = {
+            to_email: RECIPIENT_EMAIL,
+            subject: "Date Accepted! Chocolits Invitation 💕",
             status: "ACCEPTED! 💕",
             venue: "Chocolits",
             date: state.selectedDate,
             time: state.selectedTime,
-            answersHistory: state.answersHistory.join(" -> "),
+            answers: state.answersHistory.join(" -> "),
             timestamp: new Date().toLocaleString()
         };
 
-        // Try Formspree / EmailJS or mailto fallback
-        setTimeout(() => {
-            statusBadge.style.background = "#d1e7dd";
-            statusBadge.style.color = "#0f5132";
-            statusText.innerHTML = `<i class="fa-solid fa-check"></i> Date details ready for ${RECIPIENT_EMAIL}!`;
-            showToast("Date Confirmed & Sent! 💖");
-
-            triggerMailtoFallback("New Date Accepted! Chocolits Invitation", payload);
-        }, 1200);
+        sendEmailViaEmailJS(templateParams,
+            () => {
+                statusBadge.style.background = "#d1e7dd";
+                statusBadge.style.color = "#0f5132";
+                statusText.innerHTML = `<i class="fa-solid fa-check"></i> Date details sent to ${RECIPIENT_EMAIL}! ✅`;
+                showToast("Date Confirmed & Email Sent! 💖");
+            },
+            () => {
+                // Fallback: open mailto
+                triggerMailtoFallback("Date Accepted! Chocolits Invitation 💕", templateParams);
+                statusBadge.style.background = "#d1e7dd";
+                statusBadge.style.color = "#0f5132";
+                statusText.innerHTML = `<i class="fa-solid fa-check"></i> Date details ready for ${RECIPIENT_EMAIL}!`;
+                showToast("Date Confirmed! 💖");
+            }
+        );
     }
 
     function triggerMailtoFallback(subject, data) {
@@ -550,16 +640,15 @@ document.addEventListener('DOMContentLoaded', () => {
             `Venue: Chocolits`,
             `Selected Date: ${data.date || 'N/A'}`,
             `Selected Time: ${data.time || 'N/A'}`,
-            `Response Path: ${data.answersHistory || (data.answers ? data.answers.join(' -> ') : 'N/A')}`,
+            `Response Path: ${data.answers || 'N/A'}`,
             `Timestamp: ${data.timestamp}`,
             ``,
             `Sent with love from the Date Invitation Web App 💕`
         ];
 
         const mailtoUrl = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-        
-        // Also log to window for easy inspection
-        console.log("Mailto Link Generated:", mailtoUrl);
+        window.open(mailtoUrl, '_blank');
+        console.log("Mailto fallback triggered:", mailtoUrl);
     }
 
     // Copy Summary Button
