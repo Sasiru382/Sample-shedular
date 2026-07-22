@@ -1,0 +1,16 @@
+I want to host this website in github okey, I have created this as a public repo. so i know with github i can host it.
+add CI/CD pipeline as well for this so i can do update continusly.
+
+Important:
+The website should render perfectly in both PC and mobile screens.
+
+What i am making:
+A modern and romantic looking static website created as a invitation. asking the girl i love for a date at chocolits on a date she likes. a calender should popup and she can select a date. Time should be between 10 am - 4 pm. and a message should be displayed based on the selection. i want her to feel special. so design it well.
+add soft music as well. add a heart animation on mouse hover and a sound effect as well.
+make sure she has a great experience visiting this website and accepting the invitation.
+First it should have a welcome page with cute bever pic. and message `Hii My Love` , she can click on the button below it says `yes` , and then it should go to next page and ask if she likes to go on a date with me to chocolits with a another beaver image. she can click yes or no. if she clicks no should display a sad beaver image with a message like `preety please! we can eat brownies and cakes till our belly popps `, again yes and No. then if she clicks on No then a another sad beaver pic with a image with message like `i just want to listean to you and see you smile, just 1 or 2h is enough`, again yes and No. if she clicks no then crying beaver image and sorry to distube love and then send me a email on `sasiruvishmika@gmail.com` the answer list she gave for each question. if she clicks on yes on any senario go for the calender. 
+in calender page ask her to select a date between `Today` to `28-December-2026` . and time should be between 10 am - 4 pm. and a message should be displayed based on the selection. i want her to feel special. so design it well.
+
+when she click yes the hearts should shoot out from every conner before going to calender. and once she picked the date and click  `i like this date` another happy beaver with Thank you my love page, and then i should get the email with the date time she picked and her answers list. images are in images folder.
+
+You have full freedom of design and cretivity to make it sepcial. 

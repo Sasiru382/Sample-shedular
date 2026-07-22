@@ -3,179 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World - Modern Web App</title>
-    <meta name="description" content="A beautifully designed, interactive Hello World web application built with modern web technologies.">
+    <title>A Special Invitation for You 💕</title>
+    <meta name="description" content="A romantic date invitation to Chocolits created with love.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Background Canvas Animation -->
-    <canvas id="bg-canvas"></canvas>
+    <!-- Heart Canvas Background -->
+    <canvas id="heart-canvas"></canvas>
 
-    <!-- Glowing Orbs -->
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
+    <!-- Floating Corner Hearts Container -->
+    <div id="corner-hearts-container"></div>
 
-    <div class="app-container">
-        <!-- Navigation -->
-        <header class="navbar">
-            <div class="logo">
-                <span class="logo-icon"><i class="fa-solid fa-code"></i></span>
-                <span class="logo-text">Hello<span class="gradient-text">World</span></span>
+    <!-- Music Controls Floating Button -->
+    <button id="music-toggle-btn" class="music-btn playing" title="Toggle Soft Music">
+        <i class="fa-solid fa-music music-icon"></i>
+        <span class="music-label">Soft Music: Playing 💕</span>
+    </button>
+
+    <!-- Main Container -->
+    <main class="main-wrapper">
+        <!-- STEP 1: Welcome Page -->
+        <section id="step-1" class="step-card active">
+            <div class="image-wrapper">
+                <img src="images/first image.jfif" alt="Cute Beaver Greeting" class="beaver-img pulse-avatar">
+                <div class="heart-badge"><i class="fa-solid fa-heart"></i></div>
             </div>
-            <nav class="nav-links">
-                <a href="#hero" class="active">Home</a>
-                <a href="#languages">Languages</a>
-                <a href="#playground">Playground</a>
-            </nav>
-            <div class="nav-actions">
-                <button id="theme-accent-btn" class="btn-icon" title="Cycle Accent Color">
-                    <i class="fa-solid fa-palette"></i>
+            <h1 class="romantic-title">Hii My Love <span class="heart-anim">💕</span></h1>
+            <p class="romantic-subtext">I made something special just for you. Will you see what's inside?</p>
+            <div class="action-buttons">
+                <button id="btn-welcome-yes" class="btn btn-primary btn-glow">
+                    <span>Yes! 🥰</span>
+                    <i class="fa-solid fa-heart"></i>
                 </button>
-                <div class="status-pill">
-                    <span class="pulse-dot"></span>
-                    <span>Ready</span>
-                </div>
             </div>
-        </header>
+        </section>
 
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="badge-container">
-                <span class="badge">
-                    <i class="fa-solid fa-sparkles"></i> Web Project Initialized
-                </span>
+        <!-- STEP 2: Date Invitation Page -->
+        <section id="step-2" class="step-card hidden">
+            <div class="image-wrapper">
+                <img src="images/invite for the date.jfif" alt="Invite to Chocolits" class="beaver-img">
             </div>
-            
-            <h1 class="hero-title">
-                <span id="dynamic-greeting">Hello, World!</span>
-            </h1>
-            
-            <p class="hero-subtitle">
-                Welcome to your newly created modern web application. Clean code, responsive layout, and sleek design out of the box.
-            </p>
-
-            <div class="hero-cta">
-                <button id="interactive-btn" class="btn btn-primary">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Say Hello
+            <h2 class="romantic-heading">Would you like to go on a date with me to Chocolits? 🍫☕</h2>
+            <p class="romantic-subtext">Just you and me, enjoying sweet treats and creating sweet memories!</p>
+            <div class="action-buttons dual-buttons">
+                <button id="btn-step2-yes" class="btn btn-primary btn-glow">
+                    <span>Yes! I'd love to! 💖</span>
+                    <i class="fa-solid fa-heart"></i>
                 </button>
-                <a href="#languages" class="btn btn-secondary">
-                    <i class="fa-solid fa-code"></i> Explore Languages
-                </a>
-            </div>
-
-            <!-- Stats Bar -->
-            <div class="stats-grid">
-                <div class="stat-card glass-card">
-                    <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
-                    <div class="stat-info">
-                        <span class="stat-value" id="live-time">00:00:00</span>
-                        <span class="stat-label">Local Time</span>
-                    </div>
-                </div>
-                <div class="stat-card glass-card">
-                    <div class="stat-icon"><i class="fa-solid fa-mouse-pointer"></i></div>
-                    <div class="stat-info">
-                        <span class="stat-value" id="click-counter">0</span>
-                        <span class="stat-label">Interactions</span>
-                    </div>
-                </div>
-                <div class="stat-card glass-card">
-                    <div class="stat-icon"><i class="fa-solid fa-globe"></i></div>
-                    <div class="stat-info">
-                        <span class="stat-value" id="greeting-lang">English</span>
-                        <span class="stat-label">Current Greeting</span>
-                    </div>
-                </div>
+                <button id="btn-step2-no" class="btn btn-secondary btn-no">
+                    <span>No 🙈</span>
+                </button>
             </div>
         </section>
 
-        <!-- Languages Showcase Section -->
-        <section id="languages" class="section">
-            <div class="section-header">
-                <h2>"Hello, World!" in Every Stack</h2>
-                <p>Select a language to inspect how developers greet the world across different technologies.</p>
+        <!-- STEP 3: Retry 1 (Brownies & Cakes) -->
+        <section id="step-3" class="step-card hidden">
+            <div class="image-wrapper">
+                <img src="images/please image 1.webp" alt="Please Beaver" class="beaver-img sad-wiggle">
             </div>
-
-            <div class="languages-wrapper glass-card">
-                <div class="lang-tabs" id="lang-tabs">
-                    <!-- Dynamic tabs populated via JS -->
-                </div>
-                <div class="code-viewer">
-                    <div class="code-header">
-                        <div class="window-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <span id="code-filename" class="filename">hello.js</span>
-                        <button id="copy-code-btn" class="copy-btn" title="Copy code">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
-                    </div>
-                    <pre><code id="code-snippet">console.log("Hello, World!");</code></pre>
-                </div>
+            <h2 class="romantic-heading">preety please! we can eat brownies and cakes till our belly popps 🍰🍫😋</h2>
+            <p class="romantic-subtext">Think of all the warm chocolate cakes and crispy waffles waiting for us!</p>
+            <div class="action-buttons dual-buttons">
+                <button id="btn-step3-yes" class="btn btn-primary btn-glow">
+                    <span>Okay, count me in! 🎂</span>
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+                <button id="btn-step3-no" class="btn btn-secondary btn-no">
+                    <span>No 🥺</span>
+                </button>
             </div>
         </section>
 
-        <!-- Interactive Playground -->
-        <section id="playground" class="section">
-            <div class="section-header">
-                <h2>Interactive Playground</h2>
-                <p>Try out the dynamic features built right into this initial page.</p>
+        <!-- STEP 4: Retry 2 (Listen for a bit) -->
+        <section id="step-4" class="step-card hidden">
+            <div class="image-wrapper">
+                <img src="images/Gemini_Generated_Image_fp5zyhfp5zyhfp5z.png" alt="Sweet Hopeful Beaver" class="beaver-img sad-wiggle">
             </div>
-
-            <div class="cards-grid">
-                <div class="card glass-card">
-                    <div class="card-icon"><i class="fa-solid fa-comment-dots"></i></div>
-                    <h3>Custom Greeting</h3>
-                    <p>Enter your name below to personalize your greeting experience.</p>
-                    <div class="input-group">
-                        <input type="text" id="user-name-input" placeholder="Enter your name..." />
-                        <button id="greet-user-btn" class="btn btn-sm btn-primary">Greet</button>
-                    </div>
-                </div>
-
-                <div class="card glass-card">
-                    <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
-                    <h3>Accent Color</h3>
-                    <p>Select your favorite accent theme color for this dashboard.</p>
-                    <div class="color-picker-grid">
-                        <button class="color-dot active" data-color="purple" style="background: #8b5cf6;"></button>
-                        <button class="color-dot" data-color="cyan" style="background: #06b6d4;"></button>
-                        <button class="color-dot" data-color="emerald" style="background: #10b981;"></button>
-                        <button class="color-dot" data-color="rose" style="background: #f43f5e;"></button>
-                        <button class="color-dot" data-color="amber" style="background: #f59e0b;"></button>
-                    </div>
-                </div>
-
-                <div class="card glass-card">
-                    <div class="card-icon"><i class="fa-solid fa-code-branch"></i></div>
-                    <h3>Git Repository Info</h3>
-                    <p>Project initialized and ready for version control tracking.</p>
-                    <div class="git-status">
-                        <div class="git-item"><i class="fa-solid fa-code-commit"></i> Initial Commit</div>
-                        <div class="git-item"><i class="fa-solid fa-shield-halved"></i> Main Branch</div>
-                    </div>
-                </div>
+            <h2 class="romantic-heading">i just want to listean to you for a bit and see your beautiful smile 🌸✨</h2>
+            <p class="romantic-subtext">Seeing your bright smile makes my whole week so much sweeter.</p>
+            <div class="action-buttons dual-buttons">
+                <button id="btn-step4-yes" class="btn btn-primary btn-glow">
+                    <span>Aww okay yes! 💗</span>
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+                <button id="btn-step4-no" class="btn btn-secondary btn-no">
+                    <span>No 😢</span>
+                </button>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>&copy; <span id="current-year"></span> Sample Scheduler Git Project. Built with HTML5, CSS3, & JS.</p>
-        </footer>
-    </div>
+        <!-- STEP 5: Refusal / Sad Ending -->
+        <section id="step-5" class="step-card hidden">
+            <div class="image-wrapper">
+                <img src="images/last no.png" alt="Crying Beaver" class="beaver-img tear-anim img-center-face">
+            </div>
+            <h2 class="romantic-heading">sorry to distube love 💔</h2>
+            <p class="romantic-subtext">Thank you for letting me know. I will always wish you all the happiness in the world!</p>
+            <div class="status-box">
+                <i class="fa-solid fa-envelope-circle-check"></i>
+                <span id="refusal-status-text">Your response log has been sent to sasiruvishmika@gmail.com</span>
+            </div>
+            <div class="action-buttons margin-top-md">
+                <button id="btn-restart" class="btn btn-outline">
+                    <i class="fa-solid fa-rotate-left"></i> Change My Mind 💖
+                </button>
+            </div>
+        </section>
 
-    <!-- Notification Toast -->
+        <!-- STEP 6: Interactive Calendar & Time Scheduler -->
+        <section id="step-6" class="step-card hidden">
+            <div class="calendar-header">
+                <span class="badge-tag"><i class="fa-solid fa-sparkles"></i> Special Date Scheduler</span>
+                <h2 class="romantic-heading">Pick Our Special Date & Time 📅✨</h2>
+                <p class="romantic-subtext">Choose a date between <strong>Today</strong> and <strong>28-December-2026</strong>, and a time between <strong>10:00 AM – 3:00 PM</strong>.</p>
+            </div>
+
+            <!-- Custom Interactive Month Calendar -->
+            <div class="calendar-widget">
+                <div class="calendar-nav">
+                    <button id="cal-prev-month" class="cal-nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <h3 id="cal-month-year-title" class="cal-title">Month Year</h3>
+                    <button id="cal-next-month" class="cal-nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-days-header">
+                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                </div>
+                <div id="calendar-grid" class="calendar-grid">
+                    <!-- Calendar days dynamically rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Time Picker (10 AM - 3 PM) -->
+            <div class="time-picker-wrapper">
+                <label for="time-select" class="time-label">
+                    <i class="fa-regular fa-clock"></i> Select Time (10:00 AM - 3:00 PM):
+                </label>
+                <div class="time-slots-grid" id="time-slots-grid">
+                    <!-- Time slots rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- Dynamic Romantic Message Box -->
+            <div id="dynamic-date-message" class="romantic-message-box">
+                <i class="fa-solid fa-quote-left quote-icon"></i>
+                <p id="date-message-text">Select your favorite date and time above to see a special note just for you!</p>
+            </div>
+
+            <div class="action-buttons margin-top-md">
+                <button id="btn-confirm-date" class="btn btn-primary btn-glow" disabled>
+                    <span>i like this date 💘</span>
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 7: Thank You Page -->
+        <section id="step-7" class="step-card hidden">
+            <div class="image-wrapper">
+                <img src="images/ThankYouPage.jfif" alt="Happy Thank You Beaver" class="beaver-img celebration-avatar">
+                <div class="floating-heart-ring">
+                    <i class="fa-solid fa-heart h-1"></i>
+                    <i class="fa-solid fa-heart h-2"></i>
+                    <i class="fa-solid fa-heart h-3"></i>
+                </div>
+            </div>
+            <h1 class="romantic-title">Thank You My Love! 💕</h1>
+            <p class="romantic-subtext">I'm so excited to see your beautiful smile at Chocolits!</p>
+
+            <div class="summary-card">
+                <h3><i class="fa-solid fa-envelope-open-text"></i> Date Confirmation Details</h3>
+                <div class="summary-item">
+                    <span class="summary-label"><i class="fa-solid fa-location-dot"></i> Venue:</span>
+                    <span class="summary-value">Chocolits 🍫</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label"><i class="fa-regular fa-calendar-check"></i> Date Chosen:</span>
+                    <span class="summary-value" id="summary-date-val">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label"><i class="fa-regular fa-clock"></i> Time Slot:</span>
+                    <span class="summary-value" id="summary-time-val">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label"><i class="fa-solid fa-comments"></i> Answers History:</span>
+                    <span class="summary-value" id="summary-history-val">Welcome -> Date Yes</span>
+                </div>
+            </div>
+
+            <div class="email-status-badge" id="email-status-badge">
+                <i class="fa-solid fa-paper-plane spinning-icon"></i>
+                <span id="email-status-text">Sending confirmation details to sasiruvishmika@gmail.com...</span>
+            </div>
+
+            <div class="action-buttons margin-top-md">
+                <button id="btn-copy-summary" class="btn btn-outline">
+                    <i class="fa-regular fa-copy"></i> Copy Details
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
     <div id="toast" class="toast">
         <i class="fa-solid fa-circle-check toast-icon"></i>
-        <span id="toast-message">Action successful!</span>
+        <span id="toast-message">Message text</span>
     </div>
 
     <script src="script.js"></script>
