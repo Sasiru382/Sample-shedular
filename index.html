@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World - Modern Web App</title>
+    <meta name="description" content="A beautifully designed, interactive Hello World web application built with modern web technologies.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Canvas Animation -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Glowing Orbs -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <div class="app-container">
+        <!-- Navigation -->
+        <header class="navbar">
+            <div class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-code"></i></span>
+                <span class="logo-text">Hello<span class="gradient-text">World</span></span>
+            </div>
+            <nav class="nav-links">
+                <a href="#hero" class="active">Home</a>
+                <a href="#languages">Languages</a>
+                <a href="#playground">Playground</a>
+            </nav>
+            <div class="nav-actions">
+                <button id="theme-accent-btn" class="btn-icon" title="Cycle Accent Color">
+                    <i class="fa-solid fa-palette"></i>
+                </button>
+                <div class="status-pill">
+                    <span class="pulse-dot"></span>
+                    <span>Ready</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="badge-container">
+                <span class="badge">
+                    <i class="fa-solid fa-sparkles"></i> Web Project Initialized
+                </span>
+            </div>
+            
+            <h1 class="hero-title">
+                <span id="dynamic-greeting">Hello, World!</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                Welcome to your newly created modern web application. Clean code, responsive layout, and sleek design out of the box.
+            </p>
+
+            <div class="hero-cta">
+                <button id="interactive-btn" class="btn btn-primary">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Say Hello
+                </button>
+                <a href="#languages" class="btn btn-secondary">
+                    <i class="fa-solid fa-code"></i> Explore Languages
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="stats-grid">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="live-time">00:00:00</span>
+                        <span class="stat-label">Local Time</span>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon"><i class="fa-solid fa-mouse-pointer"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="click-counter">0</span>
+                        <span class="stat-label">Interactions</span>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="greeting-lang">English</span>
+                        <span class="stat-label">Current Greeting</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages Showcase Section -->
+        <section id="languages" class="section">
+            <div class="section-header">
+                <h2>"Hello, World!" in Every Stack</h2>
+                <p>Select a language to inspect how developers greet the world across different technologies.</p>
+            </div>
+
+            <div class="languages-wrapper glass-card">
+                <div class="lang-tabs" id="lang-tabs">
+                    <!-- Dynamic tabs populated via JS -->
+                </div>
+                <div class="code-viewer">
+                    <div class="code-header">
+                        <div class="window-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span id="code-filename" class="filename">hello.js</span>
+                        <button id="copy-code-btn" class="copy-btn" title="Copy code">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre><code id="code-snippet">console.log("Hello, World!");</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Playground -->
+        <section id="playground" class="section">
+            <div class="section-header">
+                <h2>Interactive Playground</h2>
+                <p>Try out the dynamic features built right into this initial page.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-comment-dots"></i></div>
+                    <h3>Custom Greeting</h3>
+                    <p>Enter your name below to personalize your greeting experience.</p>
+                    <div class="input-group">
+                        <input type="text" id="user-name-input" placeholder="Enter your name..." />
+                        <button id="greet-user-btn" class="btn btn-sm btn-primary">Greet</button>
+                    </div>
+                </div>
+
+                <div class="card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>Accent Color</h3>
+                    <p>Select your favorite accent theme color for this dashboard.</p>
+                    <div class="color-picker-grid">
+                        <button class="color-dot active" data-color="purple" style="background: #8b5cf6;"></button>
+                        <button class="color-dot" data-color="cyan" style="background: #06b6d4;"></button>
+                        <button class="color-dot" data-color="emerald" style="background: #10b981;"></button>
+                        <button class="color-dot" data-color="rose" style="background: #f43f5e;"></button>
+                        <button class="color-dot" data-color="amber" style="background: #f59e0b;"></button>
+                    </div>
+                </div>
+
+                <div class="card glass-card">
+                    <div class="card-icon"><i class="fa-solid fa-code-branch"></i></div>
+                    <h3>Git Repository Info</h3>
+                    <p>Project initialized and ready for version control tracking.</p>
+                    <div class="git-status">
+                        <div class="git-item"><i class="fa-solid fa-code-commit"></i> Initial Commit</div>
+                        <div class="git-item"><i class="fa-solid fa-shield-halved"></i> Main Branch</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; <span id="current-year"></span> Sample Scheduler Git Project. Built with HTML5, CSS3, & JS.</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span id="toast-message">Action successful!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
