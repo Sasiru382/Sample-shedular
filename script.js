@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
         musicOscillators: []
     };
 
-    // Target date limits: Today to Dec 28, 2026
+    // Target date limits: Today to Sep 28, 2026
     const TODAY = new Date();
     TODAY.setHours(0, 0, 0, 0);
-    const MAX_DATE = new Date(2026, 11, 28); // Month is 0-indexed (11 = Dec)
+    const MAX_DATE = new Date(2026, 8, 28); // Month is 0-indexed (8 = Sep)
 
     // Target Recipient Email
     const RECIPIENT_EMAIL = "sasiruvishmika@gmail.com";
@@ -308,8 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btn-step4-no').addEventListener('click', () => {
         state.answersHistory.push("Listen For A Bit: No");
-        goToStep(5); // Refusal
-        sendRefusalEmail();
+        goToStep(5); // Refusal - email only sent when she clicks 'my mind wont change'
     });
 
     // Step 5: Restart / Change mind
@@ -318,34 +317,10 @@ document.addEventListener('DOMContentLoaded', () => {
         goToStep(2);
     });
 
-    // Step 5: Final refusal - send email
+    // Step 5: Final refusal - send email only when she confirms
     document.getElementById('btn-final-no').addEventListener('click', () => {
         state.answersHistory.push("Final Decision: No");
-
-        const payload = {
-            status: "Declined (Final)",
-            answers: state.answersHistory,
-            timestamp: new Date().toLocaleString()
-        };
-
-        const subject = "Date Invitation - Final Response (Declined)";
-        const bodyLines = [
-            "Hi Sasiru!",
-            "",
-            "Here are the date invitation response details:",
-            "----------------------------------",
-            `Status: ${payload.status}`,
-            `Response Path: ${payload.answers.join(' -> ')}`,
-            `Timestamp: ${payload.timestamp}`,
-            "",
-            "Sent from the Date Invitation Web App 💕"
-        ];
-
-        const mailtoUrl = `mailto:${RECIPIENT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-        window.open(mailtoUrl, '_blank');
-
-        showToast("Response sent to sasiruvishmika@gmail.com 💌");
-        document.getElementById('refusal-status-text').textContent = "Your final response has been sent to sasiruvishmika@gmail.com ✅";
+        sendRefusalEmail();
     });
 
     // --- Interactive Calendar System ---
@@ -535,9 +510,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Add an Email Service (Gmail) -> copy the Service ID
     // 3. Create an Email Template -> copy the Template ID
     // 4. Go to Account -> copy your Public Key
-    const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";      // Replace this
-    const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";      // Replace this
-    const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";    // Replace this
+    const EMAILJS_PUBLIC_KEY = "XqlbA3uCZNZM5IT-e";
+    const EMAILJS_SERVICE_ID = "service_do6obec";
+    const EMAILJS_TEMPLATE_ID = "template_8ptl3zj";
 
     // Initialize EmailJS
     try {
@@ -568,7 +543,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function sendRefusalEmail() {
+        const statusBox = document.getElementById('refusal-status-box');
         const badgeText = document.getElementById('refusal-status-text');
+        statusBox.style.display = 'flex';
         badgeText.textContent = `Sending response log to ${RECIPIENT_EMAIL}...`;
 
         const templateParams = {
